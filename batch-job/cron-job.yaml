@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-batch-job
+spec:
+  schedule: "0,15,30,45 * * * *" 
+  jobTemplate:
+    spec: 
+      template:
+        metadata:
+          labels:
+             app: batch-job
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - image: alice123/test:batch
+              name: main
